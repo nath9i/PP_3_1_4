@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,11 +26,7 @@
         <td th:text = "${user.surname}">...</td>
         <td th:text = "${user.age}">...</td>
         <td th:text = "${user.roles.toString()}">...</td>
-        <td>
-            <form th:method = "GET" th:action = "@{/admin/userInfo}" th:object = "${user}">
-                <button type = "submit" th:name = "id" th:value = "${user.getId()}">USER INFO</button>
-            </form>
-        </td>
+
         <td>
             <form th:method = "GET" th:action = "@{/admin/updateUser}" th:object = "${user}">
                 <button type = "submit" th:name = "id" th:value = "${user.getId()}">UPDATE USER</button>
@@ -40,6 +36,15 @@
             <form th:method = "POST" th:action = "@{/admin/deleteUser}" th:object = "${user}">
                 <button type = "submit" th:name = "id" th:value = "${user.getId()}">DELETE USER</button>
             </form>
+        </td>
+        <td>
+            <div sec:authorize="hasRole('ROLE_USER')">
+                <span th:if = "${user.getId} == ${thisUser.getId}">
+                    <form th:method = "GET" th:action = "@{/user}" th:object = "${user}">
+                        <input type = "submit" value = "USER INFO">
+                    </form>
+                </span>
+            </div>
         </td>
     </tr>
 </table>

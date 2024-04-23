@@ -54,7 +54,6 @@ public class User implements UserDetails {
     @Column(name = "username", unique = true, nullable = false, length = 40)
     private String username;
 
-    @Pattern(regexp = "[A-Za-z0-9]+", message = "Password should consist of letters and digits")
     @NotBlank(message = "Password is a required field")
     @Size(min = 6, message = "Password length should be at least 6 symbols")
     @Column(name = "password", nullable = false)
