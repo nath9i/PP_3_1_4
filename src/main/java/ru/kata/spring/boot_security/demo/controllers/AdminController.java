@@ -18,13 +18,13 @@ import java.security.Principal;
 
 
 @Controller
-public class UserController {
+public class AdminController {
 
 	private final UserService userService;
 	private final RoleService roleService;
 
 	@Autowired
-	private UserController(UserService userService, RoleService roleService) {
+	private AdminController(UserService userService, RoleService roleService) {
 		this.userService = userService;
         this.roleService = roleService;
     }
@@ -34,12 +34,6 @@ public class UserController {
 		model.addAttribute("thisUser", userService.getUserByUsername(principal.getName()));
 		model.addAttribute("users", userService.getAllUsers());
 		return "all-users";
-	}
-
-	@GetMapping(value = "/user")
-	public String showUserInfo(Model model, Principal principal) {
-		model.addAttribute("user", userService.getUserByUsername(principal.getName()));
-		return "user-info";
 	}
 
 	@GetMapping(value = "/admin/addNewUser")
