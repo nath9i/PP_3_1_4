@@ -31,31 +31,31 @@ public class User implements UserDetails {
     @Column(name = "id")
     private int id;
 
-    @Pattern(regexp = "[A-Z][a-z]+", message = "Name should consist of letters and start with a capital")
-    @NotBlank(message = "Name is a required field")
-    @Size(min = 2, max = 40, message = "Name length should be between 2 and 40 symbols")
+//    @Pattern(regexp = "[A-Z][a-z]+", message = "Name should consist of letters and start with a capital")
+//    @NotBlank(message = "Name is a required field")
+//    @Size(min = 2, max = 40, message = "Name length should be between 2 and 40 symbols")
     @Column(name = "name", nullable = false, length = 40)
     private String name;
 
-    @Pattern(regexp = "[A-Z][a-z]+", message = "Surname should consist of letters and start with a capital")
-    @NotBlank(message = "Surname is a required field")
-    @Size(min = 2, max = 40, message = "Surname length should be between 2 and 40 symbols")
+//    @Pattern(regexp = "[A-Z][a-z]+", message = "Surname should consist of letters and start with a capital")
+//    @NotBlank(message = "Surname is a required field")
+//    @Size(min = 2, max = 40, message = "Surname length should be between 2 and 40 symbols")
     @Column(name = "surname", nullable = false, length = 40)
     private String surname;
 
-    @Min(value = 1, message = "Age should be greater than 0")
-    @Max(value = 120, message = "I just can't believe that!")
+//    @Min(value = 1, message = "Age should be greater than 0")
+//    @Max(value = 120, message = "I just can't believe that!")
     @Column(name = "age", nullable = false)
-    private byte age;
+    private Integer age;
 
-    @Pattern(regexp = "[A-Za-z0-9]+", message = "Username should consist of letters and digits")
-    @NotBlank(message = "Username is a required field")
-    @Size(min = 2, max = 40, message = "Username length should be between 2 and 40 symbols")
+//    @Pattern(regexp = "[A-Za-z0-9]+", message = "Username should consist of letters and digits")
+//    @NotBlank(message = "Username is a required field")
+//    @Size(min = 2, max = 40, message = "Username length should be between 2 and 40 symbols")
     @Column(name = "username", unique = true, nullable = false, length = 40)
     private String username;
 
-    @NotBlank(message = "Password is a required field")
-    @Size(min = 6, message = "Password length should be at least 6 symbols")
+//    @NotBlank(message = "Password is a required field")
+//    @Size(min = 6, message = "Password length should be at least 6 symbols")
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -65,7 +65,7 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    public User(String name, String surname, byte age) {
+    public User(String name, String surname, Integer age) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -148,11 +148,11 @@ public class User implements UserDetails {
         this.surname = surname;
     }
 
-    public byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 

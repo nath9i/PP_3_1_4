@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,11 @@ public class UserServiceImpl implements UserService {
 
    @Override
    public void createOrUpdateUser(User user) {
-
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
+      if (!user.getPassword().isEmpty()) {
+         user.setPassword(passwordEncoder.encode(user.getPassword()));
+      } else {
+         user.setPassword(userRepository.getById(user.getId()).getPassword());
+      }
       userRepository.save(user);
    }
 
